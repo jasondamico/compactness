@@ -41,16 +41,8 @@ read_shapefiles = function(shp, namecol, verbose=TRUE){ # namecol specifies the 
   })
     
     
-  temp <- tryCatch({
-    temp = rgdal::readOGR(shp, verbose=F)
-    if(verbose) print(paste("Loaded coordinates for ", l, " districts.", sep=""))
-    }, warning = function(war) {
-      print(paste("Warning in reading coordinates: ",war))
-    }, error = function(err) {
-      print(paste("Error in reading coordinates:  ",err))
-      break
-    })
-      
+  temp = rgdal::readOGR(shp, verbose=F)
+
   proj <- tryCatch({
     proj = sp::proj4string(temp)
     projected =  sp::spTransform(temp, sp::CRS("+proj=longlat +datum=WGS84"))
