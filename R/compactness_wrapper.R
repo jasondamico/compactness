@@ -26,10 +26,10 @@
 #' @import cleangeo
 
 
-get_compactness = function(shp, namecol, verbose=TRUE, new.models = NULL){ 
+get_compactness = function(shp, namecol, idcol = NULL, verbose=TRUE, new.models = NULL){ 
   files = read_shapefiles(shp, namecol, verbose)
   features = generate_features(files, verbose)
-  predictions = suppressWarnings(generate_predictions(features = features, namecol = files[[3]], new.models = new.models))
+  predictions = suppressWarnings(generate_predictions(features = features, namecol = files[[3]], idcol = idcol, new.models = new.models))
   predictions$ses = predictions$compactness- 2 - 0.01 * predictions$compactness^2 # as per the findings in the appendix
   return(predictions)
 }
