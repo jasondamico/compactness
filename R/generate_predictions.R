@@ -19,13 +19,20 @@ generate_predictions = function(features, namecol, idcol = NULL, new.models = NU
   cols_to_check = (ncol(features)-27):ncol(features)
   idx = complete.cases(features[,cols_to_check])
   features = features[idx,]
+
+  View(features)
   
   if(is.null(new.models)){
+    print("No new models detected, using stored models...")
+    View(models)
+
     olspreds = lapply(1:6, FUN=function(x) predict(models[[x]], features))
     boostpreds = lapply(7:12, FUN=function(x) predict(models[[x]], features, n.trees=100))
     rfpreds = lapply(13:18, FUN=function(x) predict(models[[x]], features))
     svpreds = lapply(19:24, FUN=function(x) predict(models[[x]], features))
   } else if(!is.null(new.models)){
+    print("New models detected, which will be used...")
+    
     olspreds = lapply(1:6, FUN=function(x) predict(new.models[[x]], features))
     boostpreds = lapply(7:12, FUN=function(x) predict(new.models[[x]], features, n.trees=100))
     rfpreds = lapply(13:18, FUN=function(x) predict(new.models[[x]], features))
