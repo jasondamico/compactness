@@ -204,7 +204,7 @@ bf2 = merge(bf2, df2[,c("district", "pca")], by.x="NAME", by.y="district")
 bf2 = bf2[,-c(1:15,31)]
 bf2 = bf2[,-11]
 
-
+View(bf2)
 
 for(i in 1:6){
   train = bf2[idx!=i,]
@@ -221,4 +221,5 @@ for(i in 1:6){
 }
 
 models = c(ols, boost, rfm, sv)
+print("Models built!")
 save(models, file="D:/GitHub/compactness_software/compactness/R/sysdata.rda")
