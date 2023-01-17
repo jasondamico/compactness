@@ -357,6 +357,7 @@ get_one_bound_feature = function(xy){
   circle_data = get_circle(xy)
   circle_area = circle_data[[1]]
   circle_perim = circle_data[[2]]
+  test_new_column = 42
   
   adj_r = sqrt(dist_area / pi)
   schwartz = dist_perim / (2 * pi * adj_r)
